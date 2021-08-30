@@ -76,15 +76,16 @@ def test_paper_tree():
 
 
 def test_rich_api():
-    insert_cost = lambda node: 1
-    remove_cost = lambda node: 1
-    small_update_cost = lambda a, b: 1
-    large_update_cost = lambda a, b: 3
+    insert_cost = lambda node: 2
+    remove_cost = lambda node: 3
+    small_update_cost = lambda a, b: 8
+    large_update_cost = lambda a, b: 4
     no_insert_cost = lambda node: 0
 
     A = Node('a')
     B = Node('b')
     # prefer update
+
     assert distance(
         A, B, Node.get_children, insert_cost, remove_cost,
         small_update_cost) == 1

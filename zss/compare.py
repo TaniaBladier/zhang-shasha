@@ -233,6 +233,8 @@ def distance(A, B, get_children, insert_cost, remove_cost, update_cost,
         ioff = Al[i] - 1
         joff = Bl[j] - 1
 
+        
+
         for x in range(1, m): # δ(l(i1)..i, θ) = δ(l(1i)..1-1, θ) + γ(v → λ)
             node = An[x+ioff]
             fd[x][0] = fd[x-1][0] + remove_cost(node)
