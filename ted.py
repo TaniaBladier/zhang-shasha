@@ -63,10 +63,10 @@ class WeirdNode(object):
 #  \--> c
 c = Node('c', [])
 b = Node('b', [])
-a = Node('a', [b, c])
+a = Node('a', [Node('b', []), Node('c', [])])
 
 # a---> c
-a2 = Node('a', [Node('d', [Node('c', [Node('d', [Node('c', [Node('c', []),Node('b', [])])])])])])
+a2 = Node('a', [Node('d', [Node('c', [])])])
 print(simple_distance(a, a2))
 print(distance(a, a2, zss.Node.get_children, 
 insert_cost = lambda node: 2, remove_cost= lambda node: 0.5, update_cost= lambda a, b: 1,return_operations=True))
