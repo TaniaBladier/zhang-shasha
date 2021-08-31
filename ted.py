@@ -69,4 +69,7 @@ a = Node('a', [Node('b', []), Node('c', [])])
 a2 = Node('a', [Node('d', [Node('c', [])])])
 print(simple_distance(a, a2))
 print(distance(a, a2, zss.Node.get_children, 
-insert_cost = lambda node: 2, remove_cost= lambda node: 0.5, update_cost= lambda a, b: 1,return_operations=True))
+insert_cost = lambda node: 2, 
+remove_cost= lambda node: 0.5, 
+update_cost= lambda a, b: 1,
+return_operations=True))
