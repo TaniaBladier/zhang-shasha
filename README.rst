@@ -173,3 +173,5 @@ __ http://www.grantjenks.com/wiki/_media/ideas:simple_fast_algorithms_for_the_ed
 `Slide deck overview of Zhang-Shasha <http://www.inf.unibz.it/dis/teaching/ATA/ata7-handout-1x1.pdf>`_
 
 `Another paper describing Zhang-Shasha <http://research.cs.queensu.ca/TechReports/Reports/1995-372.pdf>`_
+
+Tanja: Working code is in ted.py, simply run python3 ted.py
