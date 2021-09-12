@@ -67,9 +67,12 @@ a = Node('a', [Node('b', []), Node('c', [])])
 
 # a---> c
 a2 = Node('a', [Node('d', [Node('c', [])])])
-print(simple_distance(a, a2))
-print(distance(a, a2, zss.Node.get_children, 
-insert_cost = lambda node: 2, 
-remove_cost= lambda node: 0.5, 
-update_cost= lambda a, b: 1,
-return_operations=True))
+
+b = Node('ROOT', [Node('SENTENCE', [Node('CLAUSE', [Node('CORE', [Node('NP', [Node('CORE_N', [Node('NUC_N', [Node('N-PROP', [])])])]), Node('NUC', [Node('V', []), Node('ADV', [])]), Node('NP', [Node('OP-DEF', []), Node('CORE_N', [Node('NUC_N', [Node('N', [])])])]), Node('.', [])])])])])
+print(type(b))
+print(simple_distance(b, b))
+print(distance(b, b, zss.Node.get_children, 
+    insert_cost = lambda node: 2, 
+    remove_cost= lambda node: 0.5, 
+    update_cost= lambda a, b: 1,
+    return_operations=True))
