@@ -55,10 +55,11 @@ class AnnotatedTree(object):
         while len(stack) > 0:
             n, anc = stack.pop()
             nid = j
-            for c in self.get_children(n):
-                a = collections.deque(anc)
-                a.appendleft(nid)
-                stack.append((c, a))
+            if not isinstance(n, int):
+                for c in self.get_children(n):
+                    a = collections.deque(anc)
+                    a.appendleft(nid)
+                    stack.append((c, a))
             pstack.append(((n, nid), anc))
             j += 1
         lmds = dict()

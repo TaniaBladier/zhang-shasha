@@ -1,10 +1,7 @@
-#BOS 5 %% manually corrected 2020-01-15T13:15:22.377676
-Winston	--	N	--	PROP	500
-ging	--	V	--	--	503
-die	--	OP	--	DEF	506
-Treppe	--	N	--	--	504
-hinauf	--	ADV	--	--	503
-.	--	.	--	--	507
+#BOS 49 %% manually corrected 2020-01-12T17:45:51.569004
+KRIEG	--	N	--	--	500
+BEDEUTET	--	V	--	--	503
+FRIEDEN	--	N	--	--	504
 #500	--	NUC_N	--	--	501
 #501	--	CORE_N	--	--	502
 #502	--	NP	--	--	507
@@ -15,4 +12,4 @@ hinauf	--	ADV	--	--	503
 #507	--	CORE	--	--	508
 #508	--	CLAUSE	--	--	509
 #509	--	SENTENCE	--	--	0
-#EOS 5
+#EOS 49

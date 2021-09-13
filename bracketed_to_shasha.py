@@ -29,39 +29,38 @@ def negra_to_bracket(negra_file):
 
 
 
-def convert_bracketed_to_shasha_node(bracketed_tree_string):
-    shasha_tree = bracketed_tree_string.replace('ParentedTree', 'Node')
-    shasha_tree = re.sub(r'\[[0-9]+\]', r'[]', shasha_tree)
-    #print(shasha_tree)
-    return Node(shasha_tree)
+def convert_bracketed_to_shasha_node(bracketed_tree):
+    l = Node('a')
+
+    for st in bracketed_tree:
+        print('36', l)
+        print(st, type(st))
+        st = Node(str(st.label))
+        print(st, type(st))
+        l.addkid(st)
+        print('40', l)
+    return l
 
 bracketed_sentences_gold = negra_to_bracket(input_bracketed_file_negra)
 
+B = (
+    Node("f")
+        .addkid(Node("a")
+            .addkid(Node("l"))
+            .addkid(Node("c")
+                .addkid(Node("b"))))
+        .addkid(Node("e"))
+    )
+
 for s in bracketed_sentences_gold:
 
-    l = Node('')
+    
     for q in incrementaltreereader(s):
         parenttree = q[0]
         
-        for st in parenttree.subtrees():
-            st = Node(str(st.label))
-            print(st, type(st))
-            l.addkid(st)
-    print(distance(l, l, zss.Node.get_children, 
-            insert_cost = lambda node: 2, 
-            remove_cost= lambda node: 0.5, 
-            update_cost= lambda a, b: 0.5,
-            return_operations=True))
-    print('l', l)
-    print(simple_distance(l, l))
-
-"""parenttree = str(q[0:1])[1:-2]
-
-        shasha_tree = convert_bracketed_to_shasha_node(parenttree)
-        print('43', type(shasha_tree))
-        print()
-        print(distance(shasha_tree, shasha_tree, zss.Node.get_children, 
-            insert_cost = lambda node: 2, 
-            remove_cost= lambda node: 0.5, 
-            update_cost= lambda a, b: 1,
-            return_operations=True))"""
+        print(distance(parenttree, B, zss.Node.get_children, 
+                insert_cost = lambda node: 1, 
+                remove_cost= lambda node: 1, 
+                update_cost= lambda a, b: 1,
+                return_operations=True))
+        print('simple distance: ', simple_distance(parenttree,parenttree, return_operations=True))

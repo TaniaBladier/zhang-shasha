@@ -68,7 +68,17 @@ a = Node('a', [Node('b', []), Node('c', [])])
 # a---> c
 a2 = Node('a', [Node('d', [Node('c', [])])])
 
-b = Node('ROOT', [Node('SENTENCE', [Node('CLAUSE', [Node('CORE', [Node('NP', [Node('CORE_N', [Node('NUC_N', [Node('N-PROP', [])])])]), Node('NUC', [Node('V', []), Node('ADV', [])]), Node('NP', [Node('OP-DEF', []), Node('CORE_N', [Node('NUC_N', [Node('N', [])])])]), Node('.', [])])])])])
+b = Node('ROOT', 
+    [Node('SENTENCE', 
+    [Node('CLAUSE', 
+    [Node('CORE', 
+    [Node('NP', 
+    [Node('CORE_N', 
+    [Node('NUC_N', 
+        [Node('N-PROP', [])])])]), 
+            Node('NUC', 
+        [Node('V', []), Node('ADV', [])]), Node('NP', 
+        [Node('OP-DEF', []), Node('CORE_N', [Node('NUC_N', [Node('N', [])])])]), Node('.', [])])])])])
 print(type(b))
 print(simple_distance(b, b))
 print(distance(b, b, zss.Node.get_children, 

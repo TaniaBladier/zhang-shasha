@@ -32,21 +32,23 @@ class Node(object):
 
     @staticmethod
     def get_children(node):
-        """
-        Default value of ``get_children`` argument of :py:func:`zss.distance`.
+        if not isinstance(node,int):
+            """
+            Default value of ``get_children`` argument of :py:func:`zss.distance`.
 
-        :returns: ``self.children``.
-        """
-        return node.children
+            :returns: ``self.children``.
+            """
+            return node.children
 
     @staticmethod
     def get_label(node):
-        """
-        Default value of ``get_label`` argument of :py:func:`zss.distance`.
+        if not isinstance(node, int):
+            """
+            Default value of ``get_label`` argument of :py:func:`zss.distance`.
 
-        :returns: ``self.label``.
-        """
-        return node.label
+            :returns: ``self.label``.
+            """
+            return node.label
 
     def addkid(self, node, before=False):
         """
