@@ -58,7 +58,7 @@ for s in bracketed_sentences_gold:
     for q in incrementaltreereader(s):
         parenttree = q[0]
         
-        print(distance(parenttree, B, zss.Node.get_children, 
+        print(distance(B, B, zss.Node.get_children, 
                 insert_cost = lambda node: 1, 
                 remove_cost= lambda node: 1, 
                 update_cost= lambda a, b: 1,

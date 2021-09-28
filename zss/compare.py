@@ -100,16 +100,19 @@ class Operation(object):
         self.arg2 = arg2
 
     def __repr__(self):
-        if hasattr(self.arg1, "label") and hasattr(self.arg2, "label"):
+        if hasattr(self.arg1, "label") and not hasattr(self.arg2, "label"):
             if self.type == self.remove:
                 return '<Operation Remove: ' + self.arg1.label + '>'
-            elif self.type == self.insert:
+        elif hasattr(self.arg2, "label") and not hasattr(self.arg1, "label"):
+            if self.type == self.insert:
                 return '<Operation Insert: ' + self.arg2.label + '>'
-            elif self.type == self.update:
+        elif hasattr(self.arg1, "label") and hasattr(self.arg2, "label"):
+            if self.type == self.update:
                 return '<Operation Update: ' + self.arg1.label + ' to ' + self.arg2.label + '>'
             else:
                 return '<Operation Match: ' + self.arg1.label + ' to ' + self.arg2.label + '>'
         else:
+            pass
             if self.type == self.remove:
                 return '<Operation Remove>'
             elif self.type == self.insert:
@@ -135,6 +138,7 @@ MATCH = Operation.match
 
 def simple_distance(A, B, get_children=Node.get_children,
         get_label=Node.get_label, label_dist=strdist, return_operations=False):
+
     """Computes the exact tree edit distance between trees A and B.
 
     Use this function if both of these things are true:
@@ -170,6 +174,7 @@ def simple_distance(A, B, get_children=Node.get_children,
 
     :return: An integer distance [0, inf+)
     """
+
     return distance(
         A, B, get_children,
         insert_cost=lambda node: label_dist('', get_label(node)),
@@ -276,6 +281,7 @@ def distance(A, B, get_children, insert_cost, remove_cost, update_cost,
                     else:
                         op_type = MATCH if fd[x][y] == fd[x-1][y-1] else UPDATE
                         op = Operation(op_type, node1, node2)
+
                         partial_ops[x][y] = partial_ops[x - 1][y - 1] + [op]
 
                     operations[x + ioff][y + joff] = partial_ops[x][y]
@@ -292,6 +298,7 @@ def distance(A, B, get_children, insert_cost, remove_cost, update_cost,
                     costs = [fd[x-1][y] + remove_cost(node1),
                              fd[x][y-1] + insert_cost(node2),
                              fd[p][q] + treedists[x+ioff][y+joff]]
+
                     fd[x][y] = min(costs)
                     min_index = costs.index(fd[x][y])
                     if min_index == 0:
@@ -308,7 +315,19 @@ def distance(A, B, get_children, insert_cost, remove_cost, update_cost,
         for j in B.keyroots:
             treedist(i, j)
 
-    if return_operations:
-        return treedists[-1][-1], operations[-1][-1]
+    ignore_operations_list = [x for x in operations[-1][-1] \
+                if not str(x).startswith('<Operation Match') \
+                    and not str(x) in ['<Operation Insert>', '<Operation Remove>', '<Operation Update>']]
+    updated_ted = []
+    for x in ignore_operations_list:
+        if str(x).startswith("<Operation Insert"):
+            updated_ted.append(1)
+        if str(x).startswith("<Operation Update"):
+            updated_ted.append(1)
+        if str(x).startswith("<Operation Remove"):
+            updated_ted.append(1)
+
+    if return_operations:       
+        return sum(updated_ted), ignore_operations_list
     else:
-        return treedists[-1][-1]
+        return sum(updated_ted)
